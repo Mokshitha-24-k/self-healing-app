@@ -1,0 +1,11 @@
+groups:
+- name: pod-alerts
+  rules:
+  - alert: HighPodRestarts
+    expr: kube_pod_container_status_restarts_total > 3
+    for: 1m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Pod restarting frequently"
+      description: "Pod {{ $labels.pod }} restarted more than 3 times"
